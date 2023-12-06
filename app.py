@@ -68,8 +68,6 @@ def main():
     st.markdown(font_style, unsafe_allow_html=True)
 
 
-    # Apply background color and font style
-    st.markdown(font_style, unsafe_allow_html=True)
     # Set app title and header
     st.title("MammogrAI")
     st.header("Cancer Detection")
