@@ -7,6 +7,14 @@ from skimage import transform
 import io
 import os
 
+import base64
+
+
+def image_to_base64(image):
+    buffered = io.BytesIO()
+    image.save(buffered, format="PNG")
+    return base64.b64encode(buffered.getvalue()).decode("utf-8")
+
 # Function to preprocess the image (modify based on your preprocessing requirements)
 def preprocess_image(uploaded_file):
     img = Image.open(uploaded_file)
@@ -47,7 +55,8 @@ def main():
     with col2:
         if uploaded_file is not None:
             image = Image.open(uploaded_file)
-            st.image(image, use_column_width=True).set_class('rounded')
+            image_with_style = f'<img src="data:image/png;base64,{image_to_base64(image)}" class="rounded-image" style="width: 100%; border: 2px solid #000; border-radius: 10px;">'
+            st.markdown(image_with_style, unsafe_allow_html=True)
 
     if uploaded_file is not None:
         with st.spinner("Classifying..."):
