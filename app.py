@@ -48,6 +48,8 @@ def main():
 
     # Column 1: Cancer detection and upload button
     with col1:
+        # Set app title and header
+        st.title("MammogrAI")
         st.subheader("Cancer detection")
         # File uploader for mammogram images
         uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
@@ -88,8 +90,7 @@ def main():
         # Column 3: Chance for malignant
         st.write("Chance for Malignant:")
         st.write(f"{prediction[0][2] * 100:.2f}%")
-    else:
-        st.warning("Please upload a valid image file.")
+
 
 
 # Run the Streamlit app
