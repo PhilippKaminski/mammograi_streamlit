@@ -38,11 +38,26 @@ def display_prediction(prediction):
 
 # Main Streamlit app
 def main():
-    
-    # Set background color and font style
+
+    # Set background color
     bg_color = "#1E2023"
+
+    # Include the Montserrat link in the head section
+    head = """
+        <head>
+            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
+        </head>
+    """
+    st.markdown(head, unsafe_allow_html=True)
+
+    # Apply background color
     font_style = """
         <style>
+            @font-face {
+                font-family: 'Montserrat';
+                src: url('https://fonts.gstatic.com/s/montserrat/v22/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf') format('truetype');
+                /* Add similar lines for other styles if needed */
+            }
             body {
                 font-family: 'Montserrat', sans-serif;
                 background-color: """ + bg_color + """;
@@ -50,6 +65,8 @@ def main():
             }
         </style>
     """
+    st.markdown(font_style, unsafe_allow_html=True)
+
 
     # Apply background color and font style
     st.markdown(font_style, unsafe_allow_html=True)
