@@ -1,3 +1,4 @@
-tensorflow>=2.5.0,<3.0.0
-streamlit>=0.84.0,<0.90.0
-click==7.1.2  # Add this line to specify the version of click
+streamlit==1.11.0
+tensorflow
+Pillow==8.2.0
+scikit-image==0.18.3
