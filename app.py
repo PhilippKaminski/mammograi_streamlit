@@ -39,10 +39,6 @@ def display_prediction(prediction):
 # Main Streamlit app
 def main():
 
-    # Set app title and header
-    st.title("MammogrAI")
-
-
     # Create a layout with three columns
     col1, col2 = st.columns([1, 1])
 
