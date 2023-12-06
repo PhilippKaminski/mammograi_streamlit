@@ -52,8 +52,6 @@ def main():
 
     # Column 1: Cancer detection information
     with col1:
-        st.subheader("Cancer detection")
-        st.write("This is the final project completed by three Le Wagon students after a nine-week data science bootcamp.")
         if uploaded_file is not None:
             st.image(Image.open(uploaded_file), caption="Uploaded Image.", use_column_width=True)
         else:
