@@ -40,15 +40,22 @@ def display_prediction(prediction):
 
 # Main Streamlit app
 def main():
-    # Set app title
-    st.title("Mammography Model Web App")
+    # Set app title and header
+    st.title("MammogrAI")
+    st.header("Cancer Detection")
+    st.write("This is the final project completed by three Le Wagon students after a nine-week data science bootcamp.")
+
+    # About button to go to the "About the Team" page
+    if st.button("About"):
+        st.write("About the Team page content goes here.")
 
     # File uploader for mammogram images
     uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
 
     if uploaded_file is not None:
+        # Display top right: Uploaded Image with stroke and rounded edges
         image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image.", use_column_width=True)
+        st.image(image, caption="Uploaded Image.", use_column_width=True, output_format='PNG', channels="RGB", format="PNG", width=None)
 
         # Preprocess the image
         processed_image = preprocess_image(uploaded_file)
@@ -57,12 +64,15 @@ def main():
         model = load_model()
 
         # Make predictions
-        prediction = predict_image(model, processed_image)
+        with st.spinner("Classifying..."):
+            # Display progress bar while the model is loading
+            prediction = predict_image(model, processed_image)
 
-        # Display prediction results
+        # Remove progress bar and display prediction results
+        st.success("Classification complete!")
         display_prediction(prediction)
     else:
-        st.write("Please upload a valid image file.")
+        st.warning("Please upload a valid image file.")
 
 # Run the Streamlit app
 if __name__ == "__main__":
