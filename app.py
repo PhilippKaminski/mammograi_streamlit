@@ -3,30 +3,18 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 import numpy as np
-import os
 from skimage import transform
-import matplotlib.image as mpimg
 import io
+import os
 
 # Function to preprocess the image (modify based on your preprocessing requirements)
 def preprocess_image(uploaded_file):
-    # Convert the Image object to a byte stream
-    img_byte_array = io.BytesIO()
-    uploaded_file.save(img_byte_array, format="PNG")
-
-    # Open the image directly from the byte stream
-    img = Image.open(io.BytesIO(img_byte_array.getvalue()))
-
-    # Resize the image
+    img = Image.open(uploaded_file)
     img_resized = transform.resize(np.array(img), (225, 225, 3), mode='reflect', anti_aliasing=True)
-
-    # Reshape the image to match the model input shape
     processed_image = img_resized.reshape((1, 225, 225, 3))
-
     return processed_image
 
-
-
+# load the model
 def load_model():
     model_dir = os.path.dirname(os.path.realpath(__file__))
     model_path = os.path.join(model_dir, 'my_dense_model.h5')
@@ -35,6 +23,20 @@ def load_model():
     model = tf.keras.models.load_model(model_path)
     return model
 
+# Function to make predictions
+def predict_image(model, processed_image):
+    prediction = model.predict(processed_image)
+    return np.round(prediction, 2)
+
+# Function to display prediction results
+def display_prediction(prediction):
+    tumor_types = {0: "No Tumor", 1: "Benign Tumor", 2: "Malignant Tumor"}
+    predicted_class = np.argmax(prediction)
+    
+    st.write(f"Prediction: {tumor_types[predicted_class]}")
+
+    for class_index, tumor_type in tumor_types.items():
+        st.write(f"{tumor_type}: {prediction[0][class_index] * 100:.2f}%")
 
 # Main Streamlit app
 def main():
@@ -45,33 +47,22 @@ def main():
     uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
 
     if uploaded_file is not None:
-        
-        
         image = Image.open(uploaded_file)
         st.image(image, caption="Uploaded Image.", use_column_width=True)
 
         # Preprocess the image
-        processed_image = preprocess_image(image)
+        processed_image = preprocess_image(uploaded_file)
 
         # Load the pre-trained model
         model = load_model()
 
         # Make predictions
-        prediction = model.predict(processed_image)
-        prediction = np.round(prediction, 2)
-        if prediction[0][0] > prediction[0][1] and prediction[0][0] > prediction[0][2]:
-            st.write(f"Prediction: you have a {np.round(prediction[0][0], 2)*100}% chance that the image contains a benign tumor")
-            st.write(f"A malignant tumor has a chance of {np.round(prediction[0][1], 2)*100}% and there is a {np.round(prediction[0][2], 2)*100}% chance of no tumor")
-        elif prediction[0][1] > prediction[0][0] and prediction[0][1] > prediction[0][2]:
-            st.write(f"Prediction: you have a {np.round(prediction[0][1], 2)*100}% chance that the image contains a malignant tumor")
-            st.write(f"A benign tumor has a chance of {np.round(prediction[0][0], 2)*100}% and there is a {np.round(prediction[0][2], 2)*100}% chance of no tumor")
-        elif prediction[0][2] > prediction[0][1] and prediction[0][2] > prediction[0][0]:
-            st.write(f"Prediction: you have a {np.round(prediction[0][2], 2)*100}% chance that the image contains no tumor")
-            st.write(f"A malignant tumor has a chance of {np.round(prediction[0][0], 2)*100}% and the malignant tumor has a chance of {np.round(prediction[0][1], 2)*100}%")
-        else:
-            st.write(f"Prediction: no tumor:{np.round(prediction[0][2], 2)*100}%; benign: {np.round(prediction[0][0], 2)*100}%; malignant: {np.round(prediction[0][1], 2)*100}%" )
+        prediction = predict_image(model, processed_image)
+
+        # Display prediction results
+        display_prediction(prediction)
     else:
-        return "file = None"
+        st.write("Please upload a valid image file.")
 
 # Run the Streamlit app
 if __name__ == "__main__":
