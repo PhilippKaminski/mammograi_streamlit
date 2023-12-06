@@ -63,6 +63,11 @@ def main():
             processed_image = preprocess_image(uploaded_file)
             model = load_model()
             prediction = predict_image(model, processed_image)
+            
+        st.markdown(
+            '<style>div.css-1l02zno { background-color: #2E3135; color: white;}</style>',
+            unsafe_allow_html=True
+        )
         st.success("Classification complete!")
 
         st.subheader("Prediction Results:")
