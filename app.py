@@ -71,7 +71,6 @@ def main():
         for percent_complete in range(100):
             # Simulate the progress of the classification
             progress_bar.progress(percent_complete + 1)
-            st.sleep(0.05)  # Adjust sleep time based on your needs
 
         # Remove progress bar and display prediction results
         st.success("Classification complete!")
