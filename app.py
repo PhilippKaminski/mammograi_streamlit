@@ -54,7 +54,7 @@ def main():
     with col2:
         if uploaded_file is not None:
             image = Image.open(uploaded_file)
-            image_with_style = f'<img src="data:image/png;base64,{image_to_base64(image)}" class="rounded-image" style="width: 100%; border: 3px solid #2E3135; border-radius: 20px;">'
+            image_with_style = f'<img src="data:image/png;base64,{image_to_base64(image)}" class="rounded-image" style="width: 100%; border: 3px solid #2E3135; border-radius: 10px;">'
             st.markdown(image_with_style, unsafe_allow_html=True)
 
     if uploaded_file is not None:
