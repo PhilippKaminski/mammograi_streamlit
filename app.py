@@ -62,20 +62,10 @@ def main():
     if uploaded_file is not None:
 
         # Make predictions
-        progress_bar = st.progress(0)  # Initialize progress bar
-        progress_message = st.empty()  # Placeholder for progress message
-
-        # Set the number of steps for the progress bar
-        num_steps = 16  # Adjust as needed
-
-        for step in range(num_steps):
-            progress_bar.progress((step + 1) / num_steps)
-            progress_message.text(f"Classifying... ({step + 1}/{num_steps})")
-                
+        with st.spinner("Classifying..."):
+            # Display progress bar while the model is loading
             processed_image = preprocess_image(uploaded_file)
             model = load_model()
-                
-            # Simulate model prediction step (replace with actual prediction)
             prediction = predict_image(model, processed_image)
 
         # Remove progress bar and display prediction results
