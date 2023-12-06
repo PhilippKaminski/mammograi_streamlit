@@ -51,7 +51,6 @@ def main():
         st.subheader("Cancer detection")
         # File uploader for mammogram images
         uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
-        if uploaded_file is not None:
 
     # Column 2: Display mammography image
     with col2:
