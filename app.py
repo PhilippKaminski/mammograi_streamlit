@@ -71,7 +71,7 @@ def main():
             model = load_model()
 
             # Set the number of steps for the progress bar
-            num_steps = 25  # Adjust as needed
+            num_steps = 18462  # Adjust as needed
 
             for step in range(num_steps):
                 progress_bar.progress((step + 1) / num_steps)
