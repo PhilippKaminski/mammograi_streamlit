@@ -39,9 +39,6 @@ def display_prediction(prediction):
 # Main Streamlit app
 def main():
 
-    # Set background color
-    bg_color = "#1E2023"
-
     # Include the Montserrat link in the head section
     head = """
         <head>
@@ -50,28 +47,22 @@ def main():
     """
     st.markdown(head, unsafe_allow_html=True)
 
-    # Apply background color
+    # Set font style directly in Streamlit
     font_style = """
         <style>
-            @font-face {
-                font-family: 'Montserrat';
-                src: url('https://fonts.gstatic.com/s/montserrat/v22/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf') format('truetype');
-                /* Add similar lines for other styles if needed */
-            }
+            /* Add the Montserrat font directly to the body */
             body {
                 font-family: 'Montserrat', sans-serif;
-                background-color: """ + bg_color + """;
-                color: white;
             }
         </style>
     """
     st.markdown(font_style, unsafe_allow_html=True)
 
-
     # Set app title and header
     st.title("MammogrAI")
     st.header("Cancer Detection")
     st.write("This is the final project completed by three Le Wagon students after a nine-week data science bootcamp.")
+
 
     # About button to go to the "About the Team" page
     if st.button("About"):
