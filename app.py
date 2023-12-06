@@ -38,6 +38,21 @@ def display_prediction(prediction):
 
 # Main Streamlit app
 def main():
+    
+    # Set background color and font style
+    bg_color = "#1E2023"
+    font_style = """
+        <style>
+            body {
+                font-family: 'Montserrat', sans-serif;
+                background-color: """ + bg_color + """;
+                color: white;
+            }
+        </style>
+    """
+
+    # Apply background color and font style
+    st.markdown(font_style, unsafe_allow_html=True)
     # Set app title and header
     st.title("MammogrAI")
     st.header("Cancer Detection")
