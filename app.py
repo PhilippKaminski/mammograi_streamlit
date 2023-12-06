@@ -65,10 +65,10 @@ def main():
             prediction = predict_image(model, processed_image)
             
         st.markdown(
-            '<div id="my_success_box" style="background-color: #2E3135; color: white;">Classification complete!</div>',
+            '<div id="my_success_box">Classification complete!</div>',
             unsafe_allow_html=True
         )
-        st.success("Classification complete!", key="my_success_box")
+        st.success("Classification complete!")
         
         st.subheader("Prediction Results:")
         
