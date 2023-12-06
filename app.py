@@ -60,17 +60,18 @@ def main():
 
             
     if uploaded_file is not None:
-        # Preprocess the image
-        processed_image = preprocess_image(uploaded_file)
-
-        # Load the pre-trained model
-        model = load_model()
-
+        
         # Make predictions
         progress_bar = st.progress(0)
         for percent_complete in range(100):
             # Simulate the progress of the classification
             progress_bar.progress(percent_complete + 1)
+        
+        # Preprocess the image
+        processed_image = preprocess_image(uploaded_file)
+    
+        # Load the pre-trained model
+        model = load_model()
 
         # Remove progress bar and display prediction results
         st.success("Classification complete!")
