@@ -65,7 +65,7 @@ def main():
             prediction = predict_image(model, processed_image)
             
         st.markdown(
-            '<style>"div.st-ae st-af st-ag st-ah st-ai st-aj st-ak st-cb st-am st-b8 st-ao st-ap st-aq st-ar st-as st-at st-cc st-av st-aw st-ax st-ay st-az st-b9 st-b1 st-b2 st-b3 st-b4 st-b5 st-cd" { background-color: #2E3135; color: white;}</style>',
+            '<style>"div.st-ae.st-af.st-ag.st-ah.st-ai.st-aj.st-ak.st-cb.st-am.st-b8.st-ao.st-ap.st-aq.st-ar.st-as.st-at.st-cc.st-av.st-aw.st-ax.st-ay.st-az.st-b9.st-b1.st-b2.st-b3.st-b4.st-b5.st-cd" { background-color: #2E3135; color: white;}</style>',
             unsafe_allow_html=True
         )
         st.success("Classification complete!")
