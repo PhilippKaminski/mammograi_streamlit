@@ -39,34 +39,10 @@ def display_prediction(prediction):
 # Main Streamlit app
 def main():
 
-    # Include the Montserrat link in the head section
-    head = """
-        <head>
-            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
-        </head>
-    """
-    st.markdown(head, unsafe_allow_html=True)
-
-    # Set font style directly in Streamlit
-    font_style = """
-        <style>
-            /* Add the Montserrat font directly to the body */
-            body {
-                font-family: 'Montserrat', sans-serif;
-            }
-        </style>
-    """
-    st.markdown(font_style, unsafe_allow_html=True)
-
     # Set app title and header
     st.title("MammogrAI")
     st.header("Cancer Detection")
     st.write("This is the final project completed by three Le Wagon students after a nine-week data science bootcamp.")
-
-
-    # About button to go to the "About the Team" page
-    if st.button("About"):
-        st.write("About the Team page content goes here.")
 
     # File uploader for mammogram images
     uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
@@ -90,6 +66,22 @@ def main():
         # Remove progress bar and display prediction results
         st.success("Classification complete!")
         display_prediction(prediction)
+
+        # Display prediction results in columns
+        st.subheader("Prediction Results")
+        col1, col2, col3 = st.columns(3)
+
+        # Column 1: Chance for normal
+        col1.write("Chance for Normal:")
+        col1.write(f"{prediction[0][0] * 100:.2f}%")
+
+        # Column 2: Chance for benign
+        col2.write("Chance for Benign:")
+        col2.write(f"{prediction[0][1] * 100:.2f}%")
+
+        # Column 3: Chance for malignant
+        col3.write("Chance for Malignant:")
+        col3.write(f"{prediction[0][2] * 100:.2f}%")
     else:
         st.warning("Please upload a valid image file.")
 
