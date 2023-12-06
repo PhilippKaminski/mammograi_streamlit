@@ -56,6 +56,8 @@ def main():
             image = Image.open(uploaded_file)
             st.image(image, caption="Uploaded Image.", use_column_width=True)
          
+    
+    col1, col2, col3 = st.columns([1, 1, 1])
             
     if uploaded_file is not None:
         # Preprocess the image
@@ -76,16 +78,19 @@ def main():
         st.subheader("Prediction Results")
 
         # Column 1: Chance for normal
-        st.write("Chance for Normal:")
-        st.write(f"{prediction[0][0] * 100:.2f}%")
+        with col1:
+            st.write("No Tumor:")
+            st.write(f"{prediction[0][0] * 100:.2f}%")
 
         # Column 2: Chance for benign
-        st.write("Chance for Benign:")
-        st.write(f"{prediction[0][1] * 100:.2f}%")
+        with col2:
+            st.write("Benign:")
+            st.write(f"{prediction[0][1] * 100:.2f}%")
 
         # Column 3: Chance for malignant
-        st.write("Chance for Malignant:")
-        st.write(f"{prediction[0][2] * 100:.2f}%")
+        with col3:
+            st.write("Malignant:")
+            st.write(f"{prediction[0][2] * 100:.2f}%")
 
 
 
