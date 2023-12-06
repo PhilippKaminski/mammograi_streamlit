@@ -41,49 +41,45 @@ def main():
 
     # Set app title and header
     st.title("MammogrAI")
-    st.header("Cancer Detection")
+    st.subheader("Cancer Detection")
     st.write("This is the final project completed by three Le Wagon students after a nine-week data science bootcamp.")
 
     # File uploader for mammogram images
     uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
 
-    if uploaded_file is not None:
-        # Display top right: Uploaded Image with stroke and rounded edges
-        image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image.", use_column_width=True)
+    # Create columns for layout
+    col1, col2 = st.columns([2, 1])
 
-        # Preprocess the image
-        processed_image = preprocess_image(uploaded_file)
+    # Column 1: Cancer detection information
+    with col1:
+        st.subheader("Cancer detection")
+        st.write("This is the final project completed by three Le Wagon students after a nine-week data science bootcamp.")
+        if uploaded_file is not None:
+            st.image(Image.open(uploaded_file), caption="Uploaded Image.", use_column_width=True)
+        else:
+            st.warning("Please upload a valid image file.")
 
-        # Load the pre-trained model
-        model = load_model()
+    # Column 2: Display mammography image
+    with col2:
+        if uploaded_file is not None:
+            processed_image = preprocess_image(uploaded_file)
+            model = load_model()
 
-        # Make predictions
-        with st.spinner("Classifying..."):
-            # Display progress bar while the model is loading
-            prediction = predict_image(model, processed_image)
+            with st.spinner("Classifying..."):
+                prediction = predict_image(model, processed_image)
 
-        # Remove progress bar and display prediction results
-        st.success("Classification complete!")
-        display_prediction(prediction)
+            st.success("Classification complete!")
+            st.subheader("Prediction Results")
+            
+            # Display chance for normal, benign, malignant
+            st.write("Chance for Normal:")
+            st.write(f"{prediction[0][0] * 100:.2f}%")
 
-        # Display prediction results in columns
-        st.subheader("Prediction Results")
-        col1, col2, col3 = st.columns(3)
+            st.write("Chance for Benign:")
+            st.write(f"{prediction[0][1] * 100:.2f}%")
 
-        # Column 1: Chance for normal
-        col1.write("Chance for Normal:")
-        col1.write(f"{prediction[0][0] * 100:.2f}%")
-
-        # Column 2: Chance for benign
-        col2.write("Chance for Benign:")
-        col2.write(f"{prediction[0][1] * 100:.2f}%")
-
-        # Column 3: Chance for malignant
-        col3.write("Chance for Malignant:")
-        col3.write(f"{prediction[0][2] * 100:.2f}%")
-    else:
-        st.warning("Please upload a valid image file.")
+            st.write("Chance for Malignant:")
+            st.write(f"{prediction[0][2] * 100:.2f}%")
 
 # Run the Streamlit app
 if __name__ == "__main__":
