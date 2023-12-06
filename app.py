@@ -18,8 +18,6 @@ def preprocess_image(uploaded_file):
 def load_model():
     model_dir = os.path.dirname(os.path.realpath(__file__))
     model_path = os.path.join(model_dir, 'my_dense_model.h5')
-    # Print the absolute path for debugging
-
     model = tf.keras.models.load_model(model_path)
     return model
 
@@ -55,7 +53,7 @@ def main():
     if uploaded_file is not None:
         # Display top right: Uploaded Image with stroke and rounded edges
         image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image.", use_column_width=True, output_format='PNG', channels="RGB", format="PNG", width=None)
+        st.image(image, caption="Uploaded Image.", use_column_width=True)
 
         # Preprocess the image
         processed_image = preprocess_image(uploaded_file)
