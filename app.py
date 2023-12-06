@@ -63,12 +63,8 @@ def main():
             processed_image = preprocess_image(uploaded_file)
             model = load_model()
             prediction = predict_image(model, processed_image)
-            
-        st.success(st.markdown(
-            '<div id="my_success_box">Classification complete!</div>',
-            unsafe_allow_html=True
-        ))
-        
+        st.success("Classification complete!")
+
         st.subheader("Prediction Results:")
         
         with open("style.css") as f:
