@@ -29,7 +29,7 @@ def preprocess_image(uploaded_file):
 
 def load_model():
     model_dir = os.path.dirname(os.path.realpath(__file__))
-    model_path = os.path.join(model_dir, 'my_model')
+    model_path = os.path.join(model_dir, 'my_dense_model.h5')
     # Print the absolute path for debugging
 
     model = tf.keras.models.load_model(model_path)
