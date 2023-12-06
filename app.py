@@ -54,10 +54,10 @@ def main():
     with col2:
         if uploaded_file is not None:
             image = Image.open(uploaded_file)
-            st.image(image, caption="Uploaded Image.", use_column_width=True)
+            st.image(image, use_column_width=True)
          
     
-    col1, col2, col3 = st.columns([1, 1, 1])
+
             
     if uploaded_file is not None:
         # Preprocess the image
@@ -76,6 +76,9 @@ def main():
 
         # Display prediction results in columns
         st.subheader("Prediction Results")
+        
+        
+        col1, col2, col3 = st.columns([1, 1, 1])
 
         # Column 1: Chance for normal
         with col1:
