@@ -67,15 +67,17 @@ def main():
         model = load_model()
 
         # Make predictions
-        with st.spinner("Classifying..."):
-            # Display progress bar while the model is loading
-            prediction = predict_image(model, processed_image)
+        progress_bar = st.progress(0)
+        for percent_complete in range(100):
+            # Simulate the progress of the classification
+            progress_bar.progress(percent_complete + 1)
+            st.sleep(0.05)  # Adjust sleep time based on your needs
 
         # Remove progress bar and display prediction results
         st.success("Classification complete!")
 
         # Display prediction results in columns
-        st.subheader("Prediction Results")
+        st.subheader("Prediction Results:")
         
         
         with open ("style.css") as f:
