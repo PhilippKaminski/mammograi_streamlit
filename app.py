@@ -47,7 +47,7 @@ def main():
     with col2:
         if uploaded_file is not None:
             image = Image.open(uploaded_file)
-            st.image(image, use_column_width=True)
+            st.image(image, use_column_width=True).set_class('rounded')
 
     if uploaded_file is not None:
         with st.spinner("Classifying..."):
