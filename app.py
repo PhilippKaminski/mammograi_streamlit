@@ -87,17 +87,17 @@ def main():
         # Column 1: Chance for normal
         with col1:
             st.write("No Tumor:")
-            st.write(f"{prediction[0][0] * 100:.2f}%")
+            st.subheader(f"{prediction[0][0] * 100:.2f}%")
 
         # Column 2: Chance for benign
         with col2:
             st.write("Benign:")
-            st.write(f"{prediction[0][1] * 100:.2f}%")
+            st.subheader(f"{prediction[0][1] * 100:.2f}%")
 
         # Column 3: Chance for malignant
         with col3:
             st.write("Malignant:")
-            st.write(f"{prediction[0][2] * 100:.2f}%")
+            st.subheader(f"{prediction[0][2] * 100:.2f}%")
 
 
 
