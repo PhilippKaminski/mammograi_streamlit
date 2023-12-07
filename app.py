@@ -7,18 +7,12 @@ from skimage import transform
 import io
 import os
 import base64
-import random
 
 
 def image_to_base64(image):
     buffered = io.BytesIO()
     image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode("utf-8")
-
-def get_random_image_path():
-    random_images_folder = "random_images"
-    image_files = [f for f in os.listdir(random_images_folder) if os.path.isfile(os.path.join(random_images_folder, f))]
-    return os.path.join(random_images_folder, random.choice(image_files))
 
 
 # Function to preprocess the image (modify based on your preprocessing requirements)
@@ -87,20 +81,8 @@ def main():
     with col1:
         st.title("MammogrAI")
         st.subheader("Cancer detection")
-        
-        
         uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
 
-        try_random_picture = st.button("Try a random picture")
-        if try_random_picture:
-            # Get a random image path
-            random_image_path = get_random_image_path()
-            uploaded_file = open(random_image_path, "rb")
-
-
-        
-        
-        
     # Column 2: Display mammography image
     with col2:
         if uploaded_file is not None:
