@@ -68,15 +68,6 @@ def display_consultation(prediction):
 # Main Streamlit app
 def main():
     
-    hide_menu_style = """
-        <style>
-        #MainMenu {visibility: hidden; }
-        footer {visibility: hidden;}
-        </style>
-    """
-    st.markdown(hide_menu_style, unsafe_allow_html=True)
-    
-    
     logo = Image.open("logo.png")
     logo_base64 = image_to_base64(logo)
     st.set_page_config(page_title="MammogrAI", page_icon=logo_base64)
