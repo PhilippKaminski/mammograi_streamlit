@@ -78,8 +78,8 @@ def main():
     
     
     logo = Image.open("logo.png")
-    # logo_base64 = image_to_base64(logo)
-    st.set_page_config(page_title="MammogrAI", page_icon=logo)
+    logo_base64 = image_to_base64(logo)
+    st.set_page_config(page_title="MammogrAI", page_icon=logo_base64)
     
     placeholder_image = Image.open("placeholder_image.jpg")
     placeholder_base64 = image_to_base64(placeholder_image)
