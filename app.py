@@ -91,7 +91,7 @@ def main():
         try_random_picture = st.button("Try a random picture")
 
         if try_random_picture:
-            # Upload a random image from the "random_images" folder
+            # Get a random image path
             random_image_path = get_random_image_path()
             uploaded_file = open(random_image_path, "rb")
         else:
