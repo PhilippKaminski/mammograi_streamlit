@@ -47,17 +47,17 @@ def display_consultation(prediction):
     predicted_class = np.argmax(prediction)
     
     if predicted_class == 0:
-        st.subheader("Result: Normal. No evidence of breast cancer detected.")
+        st.subheader("Result: Normal (no evidence of breast cancer detected)")
         st.write("It's important to note that AI classifications may have a margin of error, and regular mammograms, as recommended by healthcare professionals, are still advised. Consult with your healthcare provider for personalized guidance on screening intervals, typically recommended annually for women aged 40 and older.")
     elif predicted_class == 1:
-        st.subheader("Result: Benign. No signs of malignant features observed.")
+        st.subheader("Result: Benign (no signs of malignant features observed)")
         st.write("While the AI assessment suggests a benign condition, it's essential to acknowledge the possibility of false positives. Options to proceed include:")
         st.write("1. **Consultation with a Specialist:** Schedule an appointment with a breast health specialist for a thorough clinical evaluation.")
         st.write("2. **Follow-up Imaging:** Additional imaging studies, such as ultrasound or MRI, may be recommended to further assess the nature of the identified benign features.")
         st.write("3. **Biopsy if Necessary:** If uncertainties persist, a biopsy might be suggested to obtain a definitive diagnosis.")
         st.write("Always consult with your healthcare provider to determine the most appropriate course of action based on your individual circumstances.")
     elif predicted_class == 2:
-        st.subheader("Result: Malignant. Indications of potential breast cancer detected.")
+        st.subheader("Result: Malignant (indications of potential breast cancer detected)")
         st.write("It's crucial to understand that AI results may have false negatives, and confirmation by medical professionals is essential. Options to consider following a malignant diagnosis:")
         st.write("1. **Consultation with Oncologist:** Schedule an immediate consultation with an oncologist to discuss the diagnosis and develop a personalized treatment plan.")
         st.write("2. **Biopsy Confirmation:** Confirm the malignancy through a biopsy, which provides detailed information about the type and stage of the cancer.")
