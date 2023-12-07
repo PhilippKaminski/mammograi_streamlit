@@ -87,14 +87,14 @@ def main():
     with col1:
         st.title("MammogrAI")
         st.subheader("Cancer detection")
-        uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
-        
-        
-        if st.button("Try a picture"):
+    
+        if st.button("Try a random picture"):
             # Upload a random image from the "random_images" folder
             random_image_path = get_random_image_path()
             uploaded_file = open(random_image_path, "rb")
             st.file_uploader("Randomly Selected Image", type=["jpg", "png", "jpeg"], key="random_image")
+        else:
+            uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
 
         
         
