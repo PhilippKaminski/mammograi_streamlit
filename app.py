@@ -140,10 +140,8 @@ def main():
                 
         if st.button("Consultation"):
             with st.spinner("Generating consultation information..."):
-                if try_random_picture:
-                    display_consultation(prediction)
-                else:
-                    display_consultation(prediction)
+                display_consultation(prediction)
+
 
 
 
