@@ -68,7 +68,7 @@ def display_consultation(prediction):
 # Main Streamlit app
 def main():
     
-    logo = Image.open("logo.svg")
+    logo = Image.open("logo.png")
     # logo_base64 = image_to_base64(logo)
     st.set_page_config(page_title="MammogrAI", page_icon=logo)
     
