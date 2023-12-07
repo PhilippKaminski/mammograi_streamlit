@@ -75,8 +75,10 @@ def main():
             prediction = predict_image(model, processed_image)
         st.success("Classification complete!")
 
-        st.subheader("Prediction Results:")
-        
+        predicted_class = np.argmax(prediction)
+        tumor_types = {0: "No Tumor", 1: "Benign Tumor", 2: "Malignant Tumor"}
+        st.subheader(f"Prediction Results: {tumor_types[predicted_class]}")
+
         with open("style.css") as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
