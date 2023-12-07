@@ -87,7 +87,7 @@ def main():
     with col1:
         st.title("MammogrAI")
         st.subheader("Cancer detection")
-    
+
         if st.button("Try a random picture"):
             # Upload a random image from the "random_images" folder
             random_image_path = get_random_image_path()
@@ -95,10 +95,16 @@ def main():
             st.file_uploader("Randomly Selected Image", type=["jpg", "png", "jpeg"], key="random_image")
         else:
             uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
-
+        
+        # Ensure that uploaded_file is set when the "Try a random picture" button is pressed
+        if st.button("Consultation") and uploaded_file is not None:
+            with st.spinner("Generating consultation information..."):
+                processed_image = preprocess_image(uploaded_file)
+                model = load_model()
+                prediction = predict_image(model, processed_image)
+                display_consultation(prediction)
         
         
-
     # Column 2: Display mammography image
     with col2:
         if uploaded_file is not None:
