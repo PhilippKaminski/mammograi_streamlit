@@ -45,17 +45,27 @@ def display_prediction(prediction):
 def main():
     col1, col2 = st.columns([1, 1])
     # Column 1: Cancer detection and upload button
+    
+    placeholder_image = Image.open("placeholder_image.jpg")
+    placeholder_base64 = image_to_base64(placeholder_image)
+    
     with col1:
         st.title("MammogrAI")
         st.subheader("Cancer detection")
         uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
 
     # Column 2: Display mammography image
+    # Column 2: Display mammography image
     with col2:
         if uploaded_file is not None:
+            # If uploaded_file is available, display the uploaded image
             image = Image.open(uploaded_file)
-            image_with_style = f'<img src="data:image/png;base64,{image_to_base64(image)}" class="rounded-image" style="width: 100%; border: 3px solid #2E3135; border-radius: 10px;">'
-            st.markdown(image_with_style, unsafe_allow_html=True)
+        else:
+            # If uploaded_file is not available, display the placeholder image
+            image = placeholder_image
+
+        image_with_style = f'<img src="data:image/png;base64,{image_to_base64(image)}" class="rounded-image" style="width: 100%; border: 3px solid #2E3135; border-radius: 10px;">'
+        st.markdown(image_with_style, unsafe_allow_html=True)
 
     if uploaded_file is not None:
         with st.spinner("Classifying..."):
