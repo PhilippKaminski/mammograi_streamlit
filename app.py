@@ -87,15 +87,16 @@ def main():
     with col1:
         st.title("MammogrAI")
         st.subheader("Cancer detection")
-        
 
-        try_random_picture = st.button("Try a random image")
+        try_random_picture = st.button("Try a random picture")
+
         if try_random_picture:
             # Upload a random image from the "random_images" folder
             random_image_path = get_random_image_path()
             uploaded_file = open(random_image_path, "rb")
         else:
             uploaded_file = st.file_uploader("Choose a mammogram image...", type=["jpg", "png", "jpeg"])
+
         
         
         
@@ -136,10 +137,14 @@ def main():
             st.write("Malignant:")
             st.subheader(f"{prediction[0][2] * 100:.0f}%")
             
-            
+                
         if st.button("Consultation"):
             with st.spinner("Generating consultation information..."):
-                display_consultation(prediction)
+                if try_random_picture:
+                    display_consultation(prediction)
+                else:
+                    display_consultation(prediction)
+
 
 
 # Run the Streamlit app
