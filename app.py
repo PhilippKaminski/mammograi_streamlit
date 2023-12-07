@@ -67,11 +67,16 @@ def display_consultation(prediction):
 
 # Main Streamlit app
 def main():
-    col1, col2 = st.columns([1, 1])
-    # Column 1: Cancer detection and upload button
+    
+    logo = Image.open("logo.svg")
+    # logo_base64 = image_to_base64(logo)
+    st.set_page_config(page_title="MammogrAI", page_icon=logo)
     
     placeholder_image = Image.open("placeholder_image.jpg")
     placeholder_base64 = image_to_base64(placeholder_image)
+    
+    col1, col2 = st.columns([1, 1])
+    # Column 1: Cancer detection and upload button
     
     with col1:
         st.title("MammogrAI")
